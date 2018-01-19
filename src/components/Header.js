@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import { Navbar, Nav } from 'react-bootstrap'
+
+import NavItem from './NavItem'
 
 const Header = () => (
   <Navbar collapseOnSelect>
@@ -11,12 +13,8 @@ const Header = () => (
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav>
-        <NavItem>
-          <Link to='/invoices'>Invoices</Link>
-        </NavItem>
-        <NavItem>
-          <Link to='/pay'>Pay Now</Link>
-        </NavItem>
+        <NavItem href='/invoices'>Invoices</NavItem>
+        <NavItem href='/pay'>Pay Now</NavItem>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
