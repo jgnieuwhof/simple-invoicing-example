@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Checkbox, Row, Table } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
+import { formatAmountCents } from '../helpers/currency'
 import { markInvoicesForPayment } from '../reducers/reduceReadyToPay'
 
 class Invoices extends Component {
@@ -50,7 +51,7 @@ class Invoices extends Component {
                     <Checkbox onClick={(e) => { this.selectInvoice(e,x) }} />
                   </td>
                   <td>{ x.number }</td>
-                  <td>{ x.amount_cents }</td>
+                  <td>{ formatAmountCents(x.amount_cents) }</td>
                 </tr>
               ))}
             </tbody>

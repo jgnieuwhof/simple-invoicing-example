@@ -5,7 +5,10 @@ import { connect } from 'react-redux'
 
 import NavItem from './NavItem'
 
+import { formatAmountCents } from '../helpers/currency'
+
 const Header = ({ invoices }) => {
+  let totalInvoiceAmount = invoices.reduce((sum, invoice) => (sum + +invoice.amount_cents), 0)
   return (
     <Navbar collapseOnSelect>
       <Navbar.Header>
@@ -18,7 +21,7 @@ const Header = ({ invoices }) => {
           <NavItem href='/invoices'>Invoices</NavItem>
           <NavItem href='/pay'>Pay Now</NavItem>
           <NavItem href='/pay' disabled pullRight>
-            { invoices.reduce((sum, invoice) => (sum + +invoice.amount_cents), 0) }
+            { formatAmountCents(totalInvoiceAmount) }
           </NavItem>
         </Nav>
       </Navbar.Collapse>
