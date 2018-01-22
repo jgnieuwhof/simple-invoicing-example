@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Checkbox, Row, Table } from 'react-bootstrap'
+import { connect } from 'react-redux'
+
+import { markInvoicesForPayment } from '../reducers/reduceReadyToPay'
 
 class Invoices extends Component {
   state = {
@@ -21,16 +24,16 @@ class Invoices extends Component {
     })
   }
 
-  markInvoicesForPayment = () => {
-    let { selectedInvoices } = this.state
-    debugger
+  submitMarkedInvoices = () => {
+    let { dispatch } = this.props
+    dispatch(markInvoicesForPayment({ invoices: this.state.selectedInvoices }))
   }
 
   render() {
     let { invoices } = this.state
     return (
       <div className="invoices-container">
-        <Row><Button onClick={this.markInvoicesForPayment}>Mark for Payment</Button></Row>
+        <Row><Button onClick={this.submitMarkedInvoices}>Mark for Payment</Button></Row>
         <Row className='top-buffer'>
           <Table striped bordered condensed hover>
             <thead>
@@ -58,4 +61,4 @@ class Invoices extends Component {
   }
 }
 
-export default Invoices
+export default connect()(Invoices)
