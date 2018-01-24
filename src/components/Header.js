@@ -7,15 +7,17 @@ import NavItem from './NavItem'
 
 import { formatAmountCents } from '../helpers/currency'
 
-const Header = ({ invoices }) => {
-  let totalInvoiceAmount = invoices.reduce((sum, invoice) => (sum + +invoice.amount_cents), 0)
+const Header = ({ readyToPayInvoices, showHeader }) => {
+  let totalInvoiceAmount = readyToPayInvoices.reduce((sum, invoice) => (sum + +invoice.amount_cents), 0)
   return (
     <Navbar collapseOnSelect>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to='/'>Jordan's Invoicing App</Link>
-        </Navbar.Brand>
-      </Navbar.Header>
+      { showHeader && (
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to='/'>Jordan's Invoicing App</Link>
+          </Navbar.Brand>
+        </Navbar.Header>
+      )}
       <Navbar.Collapse>
         <Nav>
           <NavItem href='/invoices'>Invoices</NavItem>
@@ -29,6 +31,6 @@ const Header = ({ invoices }) => {
   )
 }
 
-export default connect(state => ({
-  invoices: state.readyToPay.invoices,
+export default connect(store => ({
+  readyToPayInvoices: store.readyToPay.invoices,
 }))(Header)
